@@ -1,9 +1,11 @@
 const express = require('express')
 require('dotenv').config();
 const cors = require('cors');
+const { dbConnection } = require('../db/config');
 
-class Server{
-    constructor(){
+
+class Server {
+    constructor() {
         this.app = express();
         this.port = process.env.PORT;
         this.usersPath = '/api/user';
@@ -13,9 +15,13 @@ class Server{
 
         //app routes
         this.routes();
+
+        //data base connection
+        this.dataBaseConnection();
+
     }
 
-    middlewares(){
+    middlewares() {
         // parse and read body
         this.app.use(express.json());
         //CORS
@@ -24,12 +30,16 @@ class Server{
         this.app.use(express.static('public'));
     }
 
-    routes(){
-        this.app.use(this.usersPath,require('../routes/user'));
+    async dataBaseConnection() {
+        await dbConnection();
     }
 
-    listen(){
-        this.app.listen(this.port,()=>{
+    routes() {
+        this.app.use(this.usersPath, require('../routes/user'));
+    }
+
+    listen() {
+        this.app.listen(this.port, () => {
             console.log(`Server Running in port ${this.port}`);
         })
     }
