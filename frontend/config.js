@@ -46,8 +46,8 @@ function enviar(){
 	let apellidoM = document.getElementById("in_am").value;
 	let matricula = document.getElementById("in_mat").value;
 	let carrera = document.getElementById("in_car").value;
+	let semestre = document.getElementById("in_sem").value;
 	let cicloEs = document.getElementById("in_cies").value;
-
 	//	Validar [PRIMERA PARTE]
 	mensaje = "";
 		//	Validar nombre
@@ -70,6 +70,10 @@ function enviar(){
 		if(carrera == 0){
 			mensaje += "Ingresa la carrera\n";
 		}
+		//	Valudad semestre
+		if(semestre == 0){
+			mensaje += "Seleccione el semestre\n";
+		}
 		//	Validar ciclo escolar
 		if(cicloEs == ""){
 			mensaje += "Ingrese el ciclo escolar\n";
@@ -77,7 +81,17 @@ function enviar(){
 
 	if(mensaje!=""){
 		alert(mensaje);
+	}else{
+		//	Enviar datos
+		json_alumno  = "\"student\":{\n\t\"name\": \""+nombre+"\",\n";
+		json_alumno += "\t\"lastName\": \""+apellidoP+"\",\n";
+		json_alumno += "\t\"secondLastName\": \""+apellidoM+"\",\n";
+		json_alumno += "\t\"schoolID\": "+matricula+",\n";
+		json_alumno += "\t\"major\": \""+carrera+"\",\n";
+		json_alumno += "\t\"currentSemester\": "+semestre+",\n";
+		json_alumno += "\t\"season\": \""+cicloEs+"\"\n},";
 	}
+	alert(json_alumno);
 
 	//	Validar [SEGUNDA PARTE]
 	
@@ -97,28 +111,52 @@ function enviar(){
     		cont++;
     	}
   	} 
-  	/*
-  	archivojson();
-  	let json = "";
-  	let mc = [];
-  	let cf = [];
-  	let gf = [];
-  	let pr = [];
-  	let td = [];
-
+  	
+  	
+  	let json_materias = "";
+  	let mc = "";
+  	let cf = "";
+  	let gf = "";
+  	let pr = "";
+  	let td = "";
+  	json_materias = "\"subjects\": [";
   	for(i=0 ; i<inputs.length/5 ; i++){
   		for(j=0; j<5; j++){
   			if(j == 0){
-
+				mc = subarray[i][j];
   			}else if(j == 1){
-
+				cf = subarray[i][j];
   			}else if(j == 2){
-
+				gf = subarray[i][j];
   			}else if(j == 3){
-
+				pr = subarray[i][j];
   			}else if(j == 4){
-
+				td = subarray[i][j];
   			}
   		}
-  	}*/
+		json_materias += "{\n\t\"name\": \""+mc+"\",";
+		json_materias += "\n\t\"grade\": "+cf+",";
+		json_materias += "\n\t\"dificulty\": \""+gf+"\",";
+		json_materias += "\n\t\"preference\": \""+pr+"\",";
+		json_materias += "\n\t\"timeDedicated\": \""+td+"\"\n},\n";
+  	}
+  	json_materias += "]";
+  	alert(json_materias);
+
+  	json_final = "{"+json_alumno+json_materias+"}";
+  	alert(json_final);
+
+  	var xhr = new XMLHttpRequest();
+	var url = "https://sistemas-virtuales.herokuapp.com/api/academic";
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.onreadystatechange = function () {
+    	if (xhr.readyState === 4 && xhr.status === 200) {
+    	    var json = JSON.parse(xhr.responseText);
+    	    console.log(json);
+    	}
+	};
+	var data = JSON.stringify(json_final);
+	xhr.send(data);
+	alert("Fin proceso");
 }
