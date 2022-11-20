@@ -1,0 +1,49 @@
+html, #body {
+    min-height: 100%;
+}
+#logo {
+    float: right;
+    width: 0;
+    left: 0;
+    position:relative;
+  }
+
+Header{
+    background: rgb(0, 81, 255);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 999px;
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.5);
+} 
+#Navegador {
+    float: right;
+    min-width: 100%;
+}
+
+#Navegador #Union {
+    list-style: none;
+    overflow: hidden;
+    min-width: 100%;
+}
+
+#Navegador #Union li {
+    float: left;
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    text-align: center;
+    
+}
+#Navegador #Union li a {
+    display: block;
+    padding:16px;
+    color: rgb(255, 255, 255);
+    text-decoration:solid;
+    
+  }
+  #Navegador #Union li:hover {
+    background: #fc9c02;
+    display:block;
+  }

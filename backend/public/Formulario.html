@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link href="Design.css" rel="stylesheet" type="text/css">
+	<title>Formulario parra tutoría</title>
+	<script type="text/javascript" src="config.js"></script>
+</head>
+<body>
+	<!-- CABECERA -->
+	<header>
+		<div id="index_header_1"><!-- LOGO --></div>
+		<div id="index_header_2">
+			Universidad Politécnica de San Luis Potosí <br>
+			FORMULARIO DE GESTOR DE ARCHIVOS	
+		</div>
+		<div id="index_header_3"><!-- Nothing is here--></div>
+	</header>
+
+	<!-- CUERPO --> 
+	<div id="index_body_main">
+
+		<div id="index_main_top"><!-- Nothing is here--></div>
+		<div id="index_main_left">
+			<h3>Datos del alumno</h3>
+			<form>
+				Nombre*: <input type="text" id="in_nom" name="in_nom" required="true" placeholder="Ingrese nombre"><br><br>
+				Apellido Paterno*: <input type="text" id="in_ap" name="in_ap" required="true" placeholder="Ingrese apellido paterno"><br><br>
+				Apellido Materno: <input type="text" id="in_am" name="in_am" required="true" placeholder="Ingrese apellido materno"><br><br>
+				Matricula*: <input type="text" id="in_mat" name="in_mat" required="true" placeholder="Ingrese matrícula"><br><br>
+				Carrera*: 
+				<select id="in_car" name="in_car">
+					<option value="0"></option>
+					<option value="ITEM">ITEM</option>
+					<option value="ITI">ITI</option>
+					<option value="ISTI">ISTI</option>
+					<option value="ITMA">ITMA</option>
+					<option value="LAG">LAG</option>
+					<option value="LTMK">LTKM</option>
+				</select><br><br>
+				Semestre*:
+				<select id="in_sem" name="in_sem">
+					<option value="0"></option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9+</option>
+				</select><br><br>
+				Ciclo Escolar*: <input type="text" id="in_cies" name="in_cies" required="true"><br><br>
+			</form>
+		</div>
+		<div id="index_main_right">
+			<table id="table_form" name="table_form">
+				<thead>
+					<tr>
+						<th>Materia cursada el semestre anterior</th>
+						<th>Calificación final</th>
+						<th>Grado de dificultad</th>
+						<th>Preferencias</th>
+						<th>Tiempo dedicado</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+			
+			<br>
+			<button id="buttn_plus" onclick="agregarFila()">+</button><button id="buttn_plus" onclick="eliminarFila()">-</button>
+			<br>
+			<button id="buttn_send" onclick="enviar()">Enviar</button>
+		</div>
+		<div id="index_main_under"><!-- Nothing is here--></div>
+	</div>
+	
+	<br><br>
+
+	<!-- PIE DE PÁGINA -->
+	<footer>
+		<div id="index_footer_1">
+			[DATOS]<br>
+			[EMPRESA]
+		</div>
+		<div id="index_footer_2"><!-- Nothing is here--></div>
+		<div id="index_footer_3"><!-- Nothing is here--></div>
+	</footer>
+</body>
+</html>
