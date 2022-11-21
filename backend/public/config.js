@@ -147,7 +147,7 @@ function enviar(){
   	alert(json_final);
 
   	var xhr = new XMLHttpRequest();
-	var url = "http://localhost:5001/api/academic";
+	var url = "https://sistemas-virtuales.herokuapp.com/api/academic";
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	xhr.onreadystatechange = function () {
