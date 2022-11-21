@@ -23,7 +23,7 @@ header{
 }
 #index_header_1{
 	grid-column: 1/4;
-	background-color: #D6DBDF;
+	background-color: #f0a504;
 }
 #index_header_2{
 	/* PAGE */
@@ -31,11 +31,11 @@ header{
 	padding-top: 17.5px;
 	/* GRID */
 	grid-column: 4/8;
-	background-color: #D6DBDF;
+	background-color: #f0a504;
 }
 #index_header_3{
 	grid-column: 8/11;
-	background-color: #D6DBDF;
+	background-color: #f0a504;
 }
 /* CUERPO - FORMULARIO */
 #index_body_main{
@@ -158,18 +158,18 @@ footer{
 	/* PAGE */
 	position: relative;
 	grid-column: 1/4;
-	background-color: #D6DBDF;
+	background-color: #087edf;
 }
 #index_footer_2{
 	/* PAGE */
 	position: relative;
 	grid-column: 4/8;
-	background-color: #D6DBDF;
+	background-color: #087edf;
 }
 #index_footer_3{
 	/* PAGE */
 	position: relative;
 	/* GRID */
 	grid-column: 8/11;
-	background-color: #D6DBDF;
+	background-color: #087edf;
 }
