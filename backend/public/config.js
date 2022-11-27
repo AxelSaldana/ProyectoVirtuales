@@ -167,16 +167,12 @@ function enviar(){
 	console.log(data);
 	
 	
-  	var xhr = new XMLHttpRequest();
-	var url = "https://sistemas-virtuales.herokuapp.com/api/academic";
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-Type", "application/json");
-	xhr.onreadystatechange = function () {
-    	if (xhr.readyState === 4 && xhr.status === 200) {
-    	    var json = JSON.parse(xhr.responseText);
-    	    console.log(json);
-    	}
-	};
-	xhr.send(data);
+
+	var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+	var theUrl = "https://sistemas-virtuales.herokuapp.com/api/academic";
+	xmlhttp.open("POST", theUrl);
+	xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	xmlhttp.send(JSON.stringify(objeto));
+
 	alert("Fin proceso");
 }
