@@ -83,15 +83,18 @@ function enviar(){
 		alert(mensaje);
 	}else{
 		//	Enviar datos
-		json_alumno  = "\"student\":{\n\t\"name\": \""+nombre+"\",\n";
-		json_alumno += "\t\"lastName\": \""+apellidoP+"\",\n";
-		json_alumno += "\t\"secondLastName\": \""+apellidoM+"\",\n";
-		json_alumno += "\t\"schoolID\": "+matricula+",\n";
-		json_alumno += "\t\"major\": \""+carrera+"\",\n";
-		json_alumno += "\t\"currentSemester\": "+semestre+",\n";
-		json_alumno += "\t\"season\": \""+cicloEs+"\"\n},";
+		var matriculaN = parseInt(matricula);
+		var semestreN = parseInt(semestre);
+		var Student = {
+			name: nombre,
+			lastName: apellidoP,
+			secondLastName: apellidoM,
+			schoolId: matriculaN,
+			major: carrera,
+			currentSemester: semestreN,
+			season: cicloEs
+		}
 	}
-	alert(json_alumno);
 
 	//	Validar [SEGUNDA PARTE]
 	
@@ -119,6 +122,13 @@ function enviar(){
   	let gf = "";
   	let pr = "";
   	let td = "";
+
+  	var materia = new Array();
+  	var calif   = new Array();
+  	var grado   = new Array();
+  	var prefe   = new Array();
+  	var tiemp   = new Array();
+
   	json_materias = "\"subjects\": [";
   	for(i=0 ; i<inputs.length/5 ; i++){
   		for(j=0; j<5; j++){
@@ -134,18 +144,29 @@ function enviar(){
 				td = subarray[i][j];
   			}
   		}
-		json_materias += "{\n\t\"name\": \""+mc+"\",";
-		json_materias += "\n\t\"grade\": "+cf+",";
-		json_materias += "\n\t\"dificulty\": \""+gf+"\",";
-		json_materias += "\n\t\"preference\": \""+pr+"\",";
-		json_materias += "\n\t\"timeDedicated\": \""+td+"\"\n},\n";
+	  	materia[i] = mc;
+	  	var cfN = parseFloat(cf);
+	  	calif[i] = cfN;
+	  	grado[i] = gf;
+	  	prefe[i] = pr;
+	  	tiemp[i] = td;
   	}
-  	json_materias += "]";
-  	alert(json_materias);
+  	var subjects = new Object(); // <--- aquí con "s"
+	var columnas = ['name','grade','dificulty','preference','timeDedicated'];
+	for (i = 0; i < inputs.length/5; i++) {
+		subjects[i] = new Object();
+		subjects[i].name = materia[i];
+ 		subjects[i].grade = calif[i];
+		subjects[i].dificulty = grado[i];
+  		subjects[i].preference = prefe[i];
+  		subjects[i].timeDedicated = tiemp[i];
+	}
 
-  	json_final = "{"+json_alumno+json_materias+"}";
-  	alert(json_final);
-
+	const objeto = Object.assign(Student,subjects)
+	var data = JSON.stringify(objeto);
+	console.log(data);
+	
+	
   	var xhr = new XMLHttpRequest();
 	var url = "https://sistemas-virtuales.herokuapp.com/api/academic";
 	xhr.open("POST", url, true);
@@ -156,7 +177,6 @@ function enviar(){
     	    console.log(json);
     	}
 	};
-	var data = JSON.stringify(json_final);
 	xhr.send(data);
 	alert("Fin proceso");
 }
