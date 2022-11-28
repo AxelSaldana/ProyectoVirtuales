@@ -169,7 +169,7 @@ function enviar(){
 	
 
 	var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-	var theUrl = "https://sistemas-virtuales.herokuapp.com/api/academic";
+	var theUrl = "localhost:5001/api/academic";
 	xmlhttp.open("POST", theUrl);
 	xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	xmlhttp.send(JSON.stringify(objeto));
