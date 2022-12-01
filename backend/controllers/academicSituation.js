@@ -24,7 +24,6 @@ const postAcademic = async(req=request, res=response) =>{
 
 const getAcademic=async(req=request, res=response) =>{
     let students = await Student.find();
-    console.log(students);
     excelfunction(students);
     res.json({
         message:"Excel creado"
