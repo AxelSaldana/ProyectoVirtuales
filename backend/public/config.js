@@ -152,45 +152,50 @@ function enviar(){
 	  	tiemp[i] = td;
   	}
   	var subjects = new Object(); // <--- aquí con "s"
+	var arraySubjects=[]; // arreglo de objetos
 	var columnas = ['name','grade','dificulty','preference','timeDedicated'];
 	for (i = 0; i < inputs.length/5; i++) {
-		subjects[i] = new Object();
-		subjects[i].name = materia[i];
- 		subjects[i].grade = calif[i];
-		subjects[i].dificulty = grado[i];
-  		subjects[i].preference = prefe[i];
-  		subjects[i].timeDedicated = tiemp[i];
+		var newSubject={}; // objeto vacio inicializado
+		//llenar los objetos:
+		newSubject.name = materia[i];
+		newSubject.grade=calif[i];
+		newSubject.dificulty=grado[i];
+		newSubject.preference=prefe[i];
+		newSubject.timeDedicated=tiemp[i];
+
+		arraySubjects.push(newSubject);//agregar el objeto al arreglo
 	}
-
-	const objeto = Object.assign({Student:Student},{subjects:subjects})
-	var json = JSON.stringify(objeto);
-	console.log(objeto);
+	const obj = { //crear el objeto para la petición
+		student:Student,
+		subjects:arraySubjects
+	}
+	var data = JSON.stringify(obj); // crear json apartir del objeto
+	console.log(data);
 	
-	
+	function reqListener() { //función respuesta del backend
+		const response = JSON.parse(this.responseText);
+		if(response.message){ // si la petición es exitosa, retorna un mensaje
+			alert(response.message);
+			/*
+				Si se guarda exitosamente, borrar los campos
+			*/
+		}else if(response.errors){ // si ocurrió un error de los campos (validación backend)
+			alert(response.errors)
+		}
 
-    let subjects2 = []
-            for(key in json){
-                if(/[0-9]+/.test(key))
-                subjects2.push(json[key])
-                }
-                    let newJson = { student:{
-                        name:json.name,
-                        lastname:json.lastname,
-                        secondLastName:json.secondLastName,
-                        major:json.major,
-                        currentSemester:json.currentSemester,
-                        season:json.season
-                    },
-                        subjects:[subjects2]
-                   
-            }
-
+	}	  
+	/* 
+	----------------------------------------------
+	NOTA: 
+	validar que no se pueda llegar aqui si los espacios estan vacíos y también los campos como la calificación sea numerica y menor o igual a 10
+	Que almenos se escriba una materia
+	----------------------------------------------
+	*/
 	var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-	var theUrl = "localhost:5001/api/academic";
+	var theUrl = "http://localhost:5001/api/academic";
 	xmlhttp.open("POST", theUrl);
 	xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-	xmlhttp.send(JSON.stringify(newJson));
-
-
+	xmlhttp.send(data);
+	xmlhttp.addEventListener("load", reqListener);
 	alert("Fin proceso");
 }
