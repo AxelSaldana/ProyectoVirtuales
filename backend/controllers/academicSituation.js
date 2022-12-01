@@ -1,4 +1,5 @@
 const { response, request } = require('express');
+const { excelfunction } = require('../middleware/excel');
 const AcademicSituation = require('../models/academicSituation');
 const Student = require('../models/student');
 
@@ -21,6 +22,16 @@ const postAcademic = async(req=request, res=response) =>{
     }
 }
 
+const getAcademic=async(req=request, res=response) =>{
+    let students = await Student.find();
+    console.log(students);
+    excelfunction(students);
+    res.json({
+        message:"Excel creado"
+    })
+}
+
 module.exports={
-    postAcademic
+    postAcademic,
+    getAcademic
 }
