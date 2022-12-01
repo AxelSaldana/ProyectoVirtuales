@@ -162,17 +162,35 @@ function enviar(){
   		subjects[i].timeDedicated = tiemp[i];
 	}
 
-	const objeto = Object.assign(Student,subjects)
-	var data = JSON.stringify(objeto);
-	console.log(data);
+	const objeto = Object.assign({Student:Student},{subjects:subjects})
+	var json = JSON.stringify(objeto);
+	console.log(objeto);
 	
 	
+
+    let subjects2 = []
+            for(key in json){
+                if(/[0-9]+/.test(key))
+                subjects2.push(json[key])
+                }
+                    let newJson = { student:{
+                        name:json.name,
+                        lastname:json.lastname,
+                        secondLastName:json.secondLastName,
+                        major:json.major,
+                        currentSemester:json.currentSemester,
+                        season:json.season
+                    },
+                        subjects:[subjects2]
+                   
+            }
 
 	var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 	var theUrl = "localhost:5001/api/academic";
 	xmlhttp.open("POST", theUrl);
 	xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-	xmlhttp.send(JSON.stringify(objeto));
+	xmlhttp.send(JSON.stringify(newJson));
+
 
 	alert("Fin proceso");
 }
