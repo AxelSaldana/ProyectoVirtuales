@@ -193,29 +193,30 @@ function enviar(){
 	*/
 	var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 	var theUrl = "http://localhost:5001/api/academic";
-	xmlhttp.open("GET", theUrl);
+	xmlhttp.open("POST", theUrl);
 	xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	xmlhttp.send(data);
 	xmlhttp.addEventListener("load", reqListener);
 	alert("Fin proceso");
 }
-function DESCARGA(){
+
+function obtenerArchivo(){
 	function reqListener() { //función respuesta del backend
 		const response = JSON.parse(this.responseText);
 		if(response.message){ // si la petición es exitosa, retorna un mensaje
 			alert(response.message);
-
-		}else if(response.errors){ // si ocurrió un error de los campos (validación backend)
-			alert(response.errors)
+			
+			/*
+				Si se creó el archivo ir a localhost:5001/files/situacionAcademica.xlsx
+			*/
+			window.location.assign("localhost:5001/files/situacionAcademica.xlsx");
 		}
 
-	}	  
+	}
+
 	var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-	var theUrl = "localhost:5001/files/situacionAcademica.xlsx";
+	var theUrl = "http://localhost:5001/api/academic";
 	xmlhttp.open("GET", theUrl);
 	xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-	xmlhttp.send(data);
 	xmlhttp.addEventListener("load", reqListener);
-
-
 }
