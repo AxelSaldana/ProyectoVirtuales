@@ -205,11 +205,8 @@ function obtenerArchivo(){
 		const response = JSON.parse(this.responseText);
 		if(response.message){ // si la petición es exitosa, retorna un mensaje
 			alert(response.message);
-			
-			/*
-				Si se creó el archivo ir a localhost:5001/files/situacionAcademica.xlsx
-			*/
-			window.location.assign("localhost:5001/files/situacionAcademica.xlsx");
+			location.replace('http://localhost:5001/files/situacionAcademica.xlsx');
+
 		}
 
 	}

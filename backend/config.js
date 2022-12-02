@@ -205,7 +205,8 @@ function obtenerArchivo(){
 		const response = JSON.parse(this.responseText);
 		if(response.message){ // si la petición es exitosa, retorna un mensaje
 			alert(response.message);
-			
+			download="http://localhost:5001/files/situacionAcademica.xlsx";
+			document.location = 'http://localhost:5001/files/situacionAcademica.xlsx';
 			/*
 				Si se creó el archivo ir a localhost:5001/files/situacionAcademica.xlsx
 			*/
