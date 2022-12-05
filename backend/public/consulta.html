@@ -68,13 +68,14 @@
     <div class="row_1">
         <div class="container">
             <div class="row"> 
-
-                <a href="http://localhost:5001/files/situacionAcademica.xlsx"  onclick="obtenerArchivo();"><h2>DESCARGAR INFORMACIÓN DE TUTORÍAS</h2></a>
+                    <h2>DESCARGAR INFORMACIÓN DE TUTORÍAS</h2>
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <button type="button" class="boton4 btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="obtenerArchivo()">Descargar</button>
+                        <button class="boton4 btn-info btn-lg"  onclick="loadDoc()">Generar Archivo</button>
+                        <!-- <button type="button" class="boton4 btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="obtenerArchivo()">Descargar</button> -->
+                        <div id="A1" style="color: black;"></div>
                     </div>
-                    <div class="panel panel-default">Pie del panel</div>
+                    <!-- <div class="panel panel-default">Pie del panel</div> -->
                   </div>
             </div>
         </div>
@@ -95,5 +96,19 @@
 </footer>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/tm-scripts.js"></script>
+<script>
+    function loadDoc() {
+        var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        window.open("https://www.w3schools.com");
+      document.getElementById('A1').innerHTML = "<a href='http://localhost:5001/files/situacionAcademica.xlsx'>Descargar</a>";
+    }
+  };
+  var url = "http://localhost:5001/api/academic";
+  xhttp.open("GET", url, true);
+  xhttp.send();
+    }
+    </script>
 </body>
 </html>
